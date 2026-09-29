@@ -1,42 +1,32 @@
 # locmai-website
 
-Personal website for Loc Mai — whole-person identity site built with Next.js.
+Personal site for Loc Mai — a single static page, no build step.
 
-## Status
-
-MVP scaffold in progress. See [design spec](docs/superpowers/specs/2026-06-09-personal-website-design.md).
+Live at [locmai27.github.io/locmai-website](https://locmai27.github.io/locmai-website/).
 
 ## Stack
 
-- Next.js 15 (App Router)
-- TypeScript + Tailwind CSS v4
-- Markdown content in `content/` (author in Cursor/VS Code)
-- Deploy target: Vercel
+Everything lives in `index.html`: markup, CSS, a small vanilla-JS block, and the
+technology logos as inlined SVG `<symbol>` definitions. The only external request
+is the Google Fonts stylesheet.
 
 ## Local development
 
+Open `index.html` in a browser, or serve the folder:
+
 ```bash
-npm install
-npm run dev
+python3 -m http.server 8000
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## Deploying
 
-## Content
+GitHub Pages serves `main` from the repository root, so pushing to `main` publishes.
+`.nojekyll` keeps Pages from running the files through Jekyll.
 
-- Projects: `content/projects/*.md`
-- Writing: `content/writing/*.md`
+## Editing
 
-Add your resume PDF to `public/resume.pdf` for the footer download link.
-
-## Commit workflow
-
-This repo is intended to be committed in small chunks:
-
-1. Design spec
-2. Scaffold + config
-3. Layout shell
-4. Homepage + About
-5. Projects
-6. Writing
-7. Stub pages
+- **Tech stack** — the `tech-rows` list and the two `marquee-group` rows in the
+  `stack-toggle` section. Both reference the same `<symbol>` ids, so a logo is
+  defined once and used in both places.
+- **Projects** — `work-item` blocks. `data-tags` drives the filter buttons, so a new
+  tag needs a matching `filter-btn`. The list pages after `PAGE_SIZE` items.
